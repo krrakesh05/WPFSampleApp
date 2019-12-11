@@ -1,0 +1,118 @@
+﻿<Page x:Class="WpfApplication2.AddCustomer"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApplication2"
+      xmlns:loginObj="clr-namespace:WpfSampleApp"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="400"
+      Title="Add Customer">
+    <Page.Resources>
+        <loginObj:LoginButtonClick x:Key="LoginButtonClickHandle">
+        </loginObj:LoginButtonClick>
+
+
+        <!--START - Login Button Style-->
+        <Style x:Key="LoginButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Gray"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="LightGreen" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!--END - Login Button Style-->
+
+
+        <!--START - Watermark for textboxes-->
+        <Style x:Key="MyWaterMarkStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <Border Background="White" BorderBrush="#FF7D8683" BorderThickness="1"/>
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="5,0,0,0" VerticalAlignment="Center" />
+                            <Label Margin="5,0,0,0" x:Name="WaterMarkLabel" Content="{TemplateBinding Tag}" VerticalAlignment="Center"
+                               Visibility="Collapsed" Foreground="Gray" FontFamily="Arial"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Text" Value=""/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Visibility" TargetName="WaterMarkLabel" Value="Visible"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="DimGray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--START - Watermark for Password Box-->
+        <!--END - Watermark for textboxes-->
+
+        <Style x:Key="ControlLabel" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="FontSize" Value="12"></Setter>
+        </Style>
+
+        <Style x:Key="PageTitle" TargetType="Label">
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+        </Style>
+
+    </Page.Resources>
+
+    <StackPanel>
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" ></ColumnDefinition>
+                <ColumnDefinition Width="auto" ></ColumnDefinition>
+                <ColumnDefinition Width="1*" ></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"  ></RowDefinition>
+                <RowDefinition Height="auto" ></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <!--START Page Title-->
+            <Label Content="Login to Order Management System" Grid.Row="0" Grid.ColumnSpan="3" Padding="0,20,0,30" HorizontalAlignment="Center"
+                  Style="{StaticResource PageTitle}" ></Label>
+
+
+            <!--START Login Form Elements -->
+            <Grid Grid.Row="1" Grid.Column="1" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"  ></ColumnDefinition>
+                    <ColumnDefinition Width="2*" ></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"  ></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto" ></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="User Name :" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Style="{StaticResource  ControlLabel  }" ></TextBlock>
+                <TextBox Width="150" Grid.Row="0" Height="30" Grid.Column="1"  Margin="5"
+                          Style="{StaticResource MyWaterMarkStyle}" Tag="User Name" ></TextBox>
+
+                <TextBlock VerticalAlignment="Center" Text="Password :" Grid.Row="1"  Grid.Column="0" Style="{StaticResource  ControlLabel  }"></TextBlock>
+                <PasswordBox Width="150" Grid.Row="1" Grid.Column="1"  Margin="5" Height="30"  Tag="Password" ></PasswordBox>
+
+                <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource LoginButtonStyle}" Content="Login" Padding="10" Margin="10" Command="{Binding myCommnad, Source={StaticResource LoginButtonClickHandle}}" ></Button>
+
+            </Grid>
+            <!--END Login Form Elements -->
+
+            <!--START - Copyright Text-->
+            <TextBlock Text="@Copyright JK Technosoft LTD" Grid.Row="2" Margin="0,40,0,10" HorizontalAlignment="Center" Grid.ColumnSpan="3"  ></TextBlock>
+            <!--END - Copyright Text-->
+        </Grid>
+
+    </StackPanel>
+</Page>

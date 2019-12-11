@@ -12,30 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfApplication2.View;
 
-namespace WpfSampleApp
+namespace WpfApplication2.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Dashboard.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Dashboard : Page
     {
-        public MainWindow()
+        public Dashboard()
         {
             InitializeComponent();
-        }
-
-        //private void Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    var handsOnWindow = new HandsOnWindow();
-        //    handsOnWindow.Show();
-        //}
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            DataContext = new Dashboard();
-
         }
     }
 }

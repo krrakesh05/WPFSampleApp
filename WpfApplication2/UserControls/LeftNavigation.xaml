@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="WpfApplication2.UserControls.LeftNavigation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Commnad="clr-namespace:WpfApplication2"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="150">
+    <UserControl.Resources>
+        <Commnad:AddCustomerCommand x:Key="AddCustomerClick"></Commnad:AddCustomerCommand>
+    </UserControl.Resources>
+    
+    <StackPanel>
+        <!--<Label Content="Left"></Label>-->
+        <Menu Width="150"  Name="Menuitem111">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Vertical"/>
+                    
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem  Padding="10" Header="Dashbord" Click="Dashboard_Click" Command="{Binding ClickCommand, Source={ StaticResource AddCustomerClick}}"  >
+                
+            </MenuItem>
+            <MenuItem Click="Customer_Click" Padding="10"  Header="Customer"></MenuItem>
+            <MenuItem Click="Orders_Click" Padding="10" Header="Orders"></MenuItem>
+            <MenuItem Click="Profile_Click" Padding="10" Header="Profile"></MenuItem>
+        </Menu>
+        <!--<Button Content="Dashboard" Click="Button_Click" ></Button>
+        <Button Content="Customer" Click="Button_Click" ></Button>
+        <Button Content="Order" Click="Button_Click" ></Button>
+        <Button Content="Profile" Click="Button_Click" ></Button>-->
+    </StackPanel>
+</UserControl>

@@ -1,18 +1,43 @@
-﻿<Window x:Class="WpfApplication2.MainWindow"
+﻿<Window x:Class="WpfSampleApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mycounterObj="clr-namespace:WpfApplication2.Entity"
-        Title="MainWindow" Height="350" Width="525">
-    <Window.Resources>
-        <mycounterObj:MyCounter1 x:Key="CounterObj" ></mycounterObj:MyCounter1>
-    </Window.Resources>
-    <Grid>
-        <TextBox x:Name="txt1" HorizontalAlignment="Left" Height="23" Margin="78,95,0,0" TextWrapping="Wrap" Text="{Binding Counter, Mode=OneWay, Source={StaticResource CounterObj}}" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btnIncrement" Content="Increment" HorizontalAlignment="Left" Margin="224,94,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CommandCounterAction, Mode=OneWay, Source={StaticResource CounterObj}}"/>
-
-    </Grid>
-    <Window.InputBindings>
-        <KeyBinding Key="F1" Command="{Binding CommandCounterAction, Mode=OneWay, Source={StaticResource CounterObj}}"></KeyBinding>
+        x:Name="MainWin"
+        xmlns:loginObj="clr-namespace:WpfSampleApp"
+         xmlns:uc="clr-namespace:WpfApplication2.UserControls"
+         xmlns:viewModel="clr-namespace:WpfApplication2.ViewModel"
+        xmlns:view="clr-namespace:WpfApplication2.View"
         
-    </Window.InputBindings>
+        Title="Dashboard - Main" Height="350" Width="800">
+
+    <Window.Resources>
+        <DataTemplate x:Name="customerViewtemplate" DataType="{x:Type viewModel:CustomerModel}">
+            <view:Dashboard DataContext="{Binding}"/>
+        </DataTemplate>
+       
+    </Window.Resources>
+
+    <StackPanel>
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" ></ColumnDefinition>
+                <ColumnDefinition Width="8*" ></ColumnDefinition>
+                
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"  ></RowDefinition>
+                <RowDefinition Height="auto" ></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <uc:Header Grid.Row="0" Grid.ColumnSpan="2"  />
+            <uc:Footer Grid.ColumnSpan="2" Grid.Row="2" />
+            <uc:LeftNavigation Grid.Row="1" ParentWindow="{Binding ElementName=MainWin}" />
+            <!--<Button Content="Dashboard" Click="Button_Click" ></Button>-->
+            <Frame Name="FrameArea"  Grid.Row="1" Grid.Column="1" NavigationUIVisibility="Hidden">
+            </Frame>
+            
+            
+            
+        </Grid>
+        
+    </StackPanel>   
 </Window>
